@@ -1,0 +1,6 @@
+2024-01-15 10:00:33 INFO CSV DATA START
+id,name,status
+1,John,active
+2,Mary,inactive
+3,Alex,active
+2024-01-15 10:00:34 INFO CSV DATA END
