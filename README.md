@@ -1,53 +1,50 @@
 # Log Analyzer CLI
 
-A Python command-line application that reads and analyzes log files, providing actionable insights such as log level statistics, common failures, timestamp tracking, filtering, and CSV export.
-
-The tool supports both plain-text logs and JSON-structured logs, making it suitable for application logs, server logs, and system monitoring use cases.
+A Python command-line application that reads log files, analyzes them, and generates useful insights such as log level counts, most common errors, filtering results, and CSV exports.
 
 ---
 
-## Project Overview
+## Overview
 
-Log files are one of the most valuable sources of information when troubleshooting software systems. However, manually reviewing thousands of log entries can be time-consuming and error-prone.
+Log Analyzer CLI is designed to process log files in different formats and produce a clean summary of application activity.
 
-Log Analyzer CLI automates the process by:
+The tool currently supports:
 
-- Reading log files line by line
-- Detecting log formats automatically
-- Extracting timestamps, log levels, and messages
-- Counting log levels
-- Identifying the most frequent error
-- Filtering logs by level and time range
-- Exporting analysis results to CSV
+- Plain text logs
+- JSON structured logs
+- CSV file detection
+
+The application reads log files, converts entries into a standardized structure, performs analysis, and exports results to CSV.
 
 ---
 
 ## Features
 
-### 1. Log File Reading
+### Feature 1: Read Log Files
 
-Read and process log files efficiently line by line.
+Reads files line-by-line from a specified path.
 
-Supported input:
+Supported file types:
 
-```text
-2024-01-15 10:03:22 ERROR Database timeout
-2024-01-15 10:04:01 INFO Server started
-```
+- Plain text logs
+- JSON logs
+- CSV files
 
 ---
 
-### 2. Automatic Log Format Detection
+### Feature 2: Detect Log Format
 
-The application supports two log formats:
+Automatically detects the format of each log source.
 
-#### Plain Text Logs
+Supported formats:
+
+#### Plain Text
 
 ```text
 2024-01-15 10:03:22 ERROR Database timeout
 ```
 
-#### JSON Logs
+#### JSON
 
 ```json
 {
@@ -57,69 +54,92 @@ The application supports two log formats:
 }
 ```
 
-The parser automatically detects the format and extracts:
+#### CSV
 
-- Timestamp
-- Log Level
-- Message
-
----
-
-### 3. Log Level Statistics
-
-Counts the number of:
-
-- ERROR logs
-- WARNING logs
-- INFO logs
-
-Example:
-
-```text
-Errors:      45
-Warnings:   102
-Info:      1053
+```csv
+id,name,status
+1,John,active
+2,Mary,inactive
 ```
 
 ---
 
-### 4. Most Common Error Detection
+### Feature 3: Parse Logs
+
+Converts supported log formats into a standardized structure:
+
+```python
+{
+    "timestamp": datetime,
+    "level": "ERROR",
+    "message": "Database timeout",
+    "format": "json",
+    "raw": "original log line"
+}
+```
+
+This ensures all analysis modules work with the same data structure regardless of source format.
+
+---
+
+### Feature 4: Count Log Levels
+
+Counts occurrences of:
+
+- ERROR
+- WARNING
+- INFO
+
+Example:
+
+```text
+Errors:   45
+Warnings: 102
+Info:     1053
+```
+
+---
+
+### Feature 5: Find Most Common Error
 
 Identifies the error message that appears most frequently.
 
 Example:
 
 ```text
-Most frequent error:
-Database timeout
+Most Common Error:
+Database timeout while connecting to users_db
+Occurrences: 12
 ```
 
 ---
 
-### 5. Log Filtering
+### Feature 6: Filter Logs
 
-Filter log entries by:
+Supports filtering structured logs by:
 
 #### Log Level
 
-```bash
---level ERROR
+```text
+ERROR
+WARNING
+INFO
 ```
 
 #### Time Range
 
-```bash
---from "2024-01-15 10:00:00"
---to "2024-01-15 12:00:00"
+```text
+Start Time
+End Time
 ```
 
-Filters can be combined for more precise analysis.
+Filtering is performed after parsing and before analysis.
 
 ---
 
-### 6. CSV Export
+### Feature 7: Export Results to CSV
 
-Export summary results into a CSV file.
+Exports analysis results into a CSV file.
 
 Example output:
 
@@ -132,6 +152,16 @@ info,1053
 most_common_error,Database timeout
 ```
 
+Exports are automatically saved in the:
+
+```text
+exports/
+```
+
+directory.
+
+Each execution generates a new file.
+
 ---
 
 ## Project Structure
@@ -141,208 +171,141 @@ log_analyzer/
 │
 ├── app.py
 │
-├── logs/
-│   └── logfile.log
-│
-├── logstoberead/
-│   └── info.log
-│
 ├── features/
-│   ├── __init__.py
 │   ├── log_reader.py
 │   ├── log_format_detector.py
+│   ├── log_parser.py
 │   ├── level_counter.py
 │   ├── common_error_finder.py
 │   ├── filter_logs.py
 │   └── csv_exporter.py
 │
 ├── utils/
-│   ├── __init__.py
 │   └── logger.py
 │
+├── logs_tobe_read/
+│   ├── text_logs.log
+│   ├── json_logs.log
+│   └── csv_logs.log
+│
+├── logs/
+│   └── logfile_<timestamp>.log
+│
 ├── exports/
+│   └── summary_<timestamp>.csv
 │
 ├── requirements.txt
-│
 └── README.md
-```
-
----
-
-## Installation
-
-### Clone the Repository
-
-```bash
-git clone <repository-url>
-cd log_analyzer
-```
-
-### Create Virtual Environment
-
-#### Windows (Git Bash)
-
-```bash
-py -m venv .venv
-source .venv/Scripts/activate
-```
-
-#### Windows (PowerShell)
-
-```powershell
-py -m venv .venv
-.venv\Scripts\Activate.ps1
-```
-
-### Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Usage
-
-### Analyze a Log File
-
-```bash
-python app.py -file logstoberead/info.log
-```
-
----
-
-### Filter by Log Level
-
-```bash
-python app.py -file logstoberead/info.log --level ERROR
-```
-
----
-
-### Filter by Date Range
-
-```bash
-python app.py \
--file logstoberead/info.log \
---from "2024-01-15 10:00:00" \
---to "2024-01-15 12:00:00"
-```
-
----
-
-### Export Summary
-
-```bash
-python app.py \
--file logstoberead/info.log \
---export exports/summary.csv
-```
-
----
-
-### Combined Example
-
-```bash
-python app.py \
--file logstoberead/info.log \
---level ERROR \
---from "2024-01-15 10:00:00" \
---to "2024-01-15 12:00:00" \
---export exports/summary.csv
-```
-
----
-
-## Sample Output
-
-```text
-====================================
-          LOG ANALYSIS REPORT
-====================================
-
-Total Logs:           1200
-Errors:                 45
-Warnings:              102
-Info:                 1053
-
-Most Frequent Error:
-Database timeout
-
-Failure Timestamps:
-10:03:22
-10:07:44
-10:15:01
-
-====================================
 ```
 
 ---
 
 ## Logging
 
-The application maintains its own execution log.
+The application maintains execution logs for troubleshooting and auditing.
 
-Location:
+Characteristics:
 
-```text
-logs/logfile.log
-```
+- Automatically creates the `logs/` directory
+- Generates a unique log file for every run
+- Logs both console and file output
+- Records errors, warnings, and execution details
 
 Example:
 
 ```text
-2026-06-06 10:01:03 INFO Reading log file
-2026-06-06 10:01:04 INFO Detecting log format
-2026-06-06 10:01:05 INFO Counting log levels
-2026-06-06 10:01:06 INFO Exporting summary
+2026-06-06 15:06:56 INFO Reading file: logs_tobe_read/json_logs.log
+2026-06-06 15:06:56 INFO Starting level counting
+2026-06-06 15:06:56 INFO CSV exported successfully
 ```
 
-These logs help with debugging and monitoring application execution.
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Gedeongithub/log_analyzer.git
+cd log_analyzer
+```
+
+Create a virtual environment:
+
+```bash
+py -m venv .venv
+```
+
+Activate it:
+
+### Git Bash
+
+```bash
+source .venv/Scripts/activate
+```
+
+### PowerShell
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
 
 ---
 
-## Future Enhancements
+## Requirements
 
-Potential improvements include:
+Python Version:
 
-- Support for additional log formats
-- Interactive dashboard
-- HTML report generation
-- Real-time log monitoring
-- Graphical visualizations
-- Database storage for historical analysis
-- Email notifications for critical errors
+```text
+Python 3.11+
+```
 
----
+Third-party dependencies:
 
-## Technologies Used
+```text
+None
+```
 
-- Python 3
-- argparse
-- logging
-- json
-- csv
-- datetime
-- collections
+This project currently uses only Python's standard library.
 
 ---
 
-## Learning Objectives
+## Running the Application
 
-This project demonstrates:
+Example:
 
-- Python file handling
-- Object-oriented programming
-- Command-line interface development
-- Log parsing techniques
-- Data filtering
-- CSV generation
-- Modular software design
-- Error handling and logging
+```bash
+py app.py
+```
+
+---
+
+## Current Analysis Pipeline
+
+```text
+LogReader
+    ↓
+LogFormatDetector
+    ↓
+LogParser
+    ↓
+LogFilter
+    ↓
+LevelCounter
+    ↓
+CommonErrorFinder
+    ↓
+CSVExporter
+```
 
 ---
 
 ## Author
 
-Developed as part of a Python backend and automation engineering learning portfolio project focused on building practical command-line tools using clean architecture and modular design principles.
+Developed as part of a Python CLI and software engineering learning project focused on:
+
+- File processing
+- Data parsing
+- Log analysis
+- Software architecture
+- Modular Python development
