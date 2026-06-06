@@ -1,0 +1,5 @@
+2024-01-15 10:00:01 INFO Application started successfully
+2024-01-15 10:00:03 INFO Loading configuration file
+2024-01-15 10:00:05 WARNING Low memory detected on server
+2024-01-15 10:00:07 ERROR Database timeout while connecting to users_db
+2024-01-15 10:00:42 INFO Application stopped successfully

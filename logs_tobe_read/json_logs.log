@@ -1,0 +1,7 @@
+{"timestamp":"2024-01-15 10:00:17","level":"INFO","message":"User login successful"}
+{"timestamp":"2024-01-15 10:00:19","level":"ERROR","message":"Auth failed for user admin"}
+{"timestamp":"2024-01-15 10:00:21","level":"ERROR","message":"Database timeout while connecting to users_db"}
+{"timestamp":"2024-01-15 10:00:23","level":"WARNING","message":"Disk usage at 80%"}
+{"timestamp":"2024-01-15 10:00:36","level":"INFO","message":"CSV processed successfully"}
+{"timestamp":"2024-01-15 10:00:38","level":"ERROR","message":"Database timeout while connecting to users_db"}
+{"timestamp":"2024-01-15 10:00:39","level":"ERROR","message":"Database timeout while connecting to users_db"}

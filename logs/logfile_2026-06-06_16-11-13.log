@@ -1,0 +1,12 @@
+2026-06-06 16:11:13,287 INFO log_analyzer - Logger initialized ->logs\logfile_2026-06-06_16-11-13.log
+2026-06-06 16:11:13,309 INFO log_analyzer - Reading file: logs_tobe_read/json_logs.log
+2026-06-06 16:11:13,309 INFO log_analyzer - Reading file: logs_tobe_read/json_logs.log
+2026-06-06 16:11:13,313 INFO log_analyzer - Starting log filtering
+2026-06-06 16:11:13,313 INFO log_analyzer - Filtering completed. 7 logs passed filter
+2026-06-06 16:11:13,313 INFO log_analyzer - Starting level counting
+2026-06-06 16:11:13,313 INFO log_analyzer - level counting completed: {'INFO': 2, 'ERROR': 4, 'WARNING': 1}
+2026-06-06 16:11:13,313 INFO log_analyzer - Analyzing common errors
+2026-06-06 16:11:13,313 INFO log_analyzer - Error frequency map: {'Auth failed for user admin': 1, 'Database timeout while connecting to users_db': 3}
+2026-06-06 16:11:13,320 INFO log_analyzer - Starting CSV export
+2026-06-06 16:11:13,321 INFO log_analyzer - CSV exported successfully -> exports\summary_2026-06-06_16-11-13.csv
+2026-06-06 16:11:13,321 INFO log_analyzer - Log analysis completed successfully

@@ -1,0 +1,8 @@
+2026-06-06 15:47:09,500 INFO log_analyzer - Logger initialized ->logs\logfile_2026-06-06_15-47-09.log
+2026-06-06 15:47:09,500 INFO log_analyzer - Reading file: logs_tobe_read/text_logs.log
+2026-06-06 15:47:09,537 INFO log_analyzer - Starting level counting
+2026-06-06 15:47:09,537 INFO log_analyzer - level counting completed: {'INFO': 3, 'WARNING': 1, 'ERROR': 1}
+2026-06-06 15:47:09,537 INFO log_analyzer - Analyzing common errors
+2026-06-06 15:47:09,537 INFO log_analyzer - Error frequency map: {'Database timeout while connecting to users_db': 1}
+2026-06-06 15:47:09,537 INFO log_analyzer - Starting log filtering
+2026-06-06 15:47:09,537 INFO log_analyzer - Filtering completed. 5 logs passed filter

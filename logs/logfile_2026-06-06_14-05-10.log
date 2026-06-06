@@ -1,0 +1,2 @@
+2026-06-06 14:05:10,548 INFO log_analyzer - Logger initialized -> logs\logfile_2026-06-06_14-05-10.log
+2026-06-06 14:05:10,549 INFO log_analyzer - Reading file: logstobe_read/info.log

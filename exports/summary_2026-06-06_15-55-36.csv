@@ -1,0 +1,6 @@
+metric,value
+total_logs,5
+errors,1
+warnings,1
+info,3
+most_common_error,Database timeout while connecting to users_db

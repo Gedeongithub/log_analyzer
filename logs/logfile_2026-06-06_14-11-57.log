@@ -1,0 +1,7 @@
+2026-06-06 14:11:57,228 INFO log_analyzer - Logger initialized ->logs\logfile_2026-06-06_14-11-57.log
+2026-06-06 14:11:57,228 INFO log_analyzer - Reading log file: logs_tobe_read/info.log
+2026-06-06 14:11:57,228 WARNING log_analyzer - Could not parse line: id,name,status | Error: Invalid log format
+2026-06-06 14:11:57,228 WARNING log_analyzer - Could not parse line: 1,John,active | Error: Invalid log format
+2026-06-06 14:11:57,228 WARNING log_analyzer - Could not parse line: 2,Mary,inactive | Error: Invalid log format
+2026-06-06 14:11:57,228 WARNING log_analyzer - Could not parse line: 3,Alex,active | Error: Invalid log format
+2026-06-06 14:11:57,228 INFO log_analyzer - Finished reading logs. Total entries: 22
