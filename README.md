@@ -226,7 +226,7 @@ Example:
 Clone the repository:
 
 ```bash
-git clone (https://github.com/Gedeongithub/log_analyzer.git)
+git clone https://github.com/Gedeongithub/log_analyzer.git
 cd log_analyzer
 ```
 
